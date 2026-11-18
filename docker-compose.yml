@@ -1,0 +1,14 @@
+services:
+  localstack:
+    container_name: localstack-galeria
+    image: localstack/localstack:3.8
+    ports:
+      - "4566:4566"            # Endpoint unificado do LocalStack (Edge Port)
+      - "4510-4559:4510-4559"  # Portas de serviços externos
+    env_file:
+      - .env
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./localstack_data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
